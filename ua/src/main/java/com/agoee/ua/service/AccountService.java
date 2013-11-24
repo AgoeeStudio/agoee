@@ -1,7 +1,9 @@
-package org.agoee.ua.service;
+package com.agoee.ua.service;
 
 import java.util.ArrayList;
 
+import com.agoee.ua.persistence.dao.DaoAccount;
+import com.agoee.ua.persistence.pojo.PojoAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,16 +25,22 @@ public class AccountService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
+    private DaoAccount daoAccount;
+
 	/**
 	 * <p>
-	 * 在OAuth2提供方，授权第三方使用其用户进行登录认证之前，需要用户进行登录认证方可继续授权 <br />
-	 * 此方法为用户登录认证时，确认用户信息是否正确。
-	 * 必须实现自{@code org.springframework.security.core.userdetails.UserDetailsService.loadUserByUsername}方法
+	 * 锟斤拷OAuth2锟结供锟斤拷锟斤拷锟斤拷权锟斤拷锟斤拷使锟斤拷锟斤拷锟矫伙拷锟斤拷锟叫碉拷录锟斤拷证之前锟斤拷锟斤拷要锟矫伙拷锟斤拷锟叫碉拷录锟斤拷证锟斤拷锟缴硷拷锟斤拷锟斤拷权 <br />
+	 * 锟剿凤拷锟斤拷为锟矫伙拷锟斤拷录锟斤拷证时锟斤拷确锟斤拷锟矫伙拷锟斤拷息锟角凤拷锟斤拷确锟斤拷
+	 * 锟斤拷锟斤拷实锟斤拷锟斤拷{@code org.springframework.security.core.userdetails.UserDetailsService.loadUserByUsername}锟斤拷锟斤拷
 	 * </p>
 	 * 
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        PojoAccount account = daoAccount.selectByUsername(username);
+        System.out.println(account.toString());
+
 
 		// test
 		logger.info("loadUserByUsername: username=" + username);
@@ -44,4 +52,7 @@ public class AccountService implements UserDetailsService {
 		return user;
 	}
 
+    public void setDaoAccount(DaoAccount daoAccount) {
+        this.daoAccount = daoAccount;
+    }
 }

@@ -1,4 +1,4 @@
-package org.agoee.ua.controller;
+package com.agoee.ua.ua.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

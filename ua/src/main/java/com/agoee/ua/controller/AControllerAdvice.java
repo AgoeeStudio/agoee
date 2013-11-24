@@ -1,4 +1,4 @@
-package org.agoee.ua.controller;
+package com.agoee.ua.ua.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.util.ClassUtils;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * 注意使用注解@ControllerAdvice作用域是全局Controller范围
- * 可应用到所有@RequestMapping类或方法上的@ExceptionHandler、@InitBinder、@ModelAttribute，在这里是@ExceptionHandler
+ * 注锟斤拷使锟斤拷注锟斤拷@ControllerAdvice锟斤拷锟斤拷锟斤拷锟斤拷全锟斤拷Controller锟斤拷围
+ * 锟斤拷应锟矫碉拷锟斤拷锟斤拷@RequestMapping锟斤拷蚍椒锟斤拷系锟紷ExceptionHandler锟斤拷@InitBinder锟斤拷@ModelAttribute锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷@ExceptionHandler
  * 
  * @author lxp
  *

@@ -18,7 +18,7 @@
 	<!-- <context:annotation-config/> -->
 	
 	<!-- component scanner for controller -->
-	<context:component-scan base-package="org.agoee.ua.**.controller" />
+	<context:component-scan base-package="com.agoee.ua.ua.**.controller" />
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />

@@ -14,10 +14,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<context:property-placeholder location="classpath:database.properties" />
-
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${database.driver}"/>
@@ -29,11 +25,17 @@
 		<property name="maxWait" value="10000" />
 		<property name="poolPreparedStatements" value="true" />
 	</bean>
-	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+
+    <!--
+    Use mybatis transaction manager instead
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.persistence.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
-	
+    -->
 </beans>

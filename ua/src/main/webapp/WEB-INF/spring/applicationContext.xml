@@ -40,5 +40,7 @@
     -->
     
     <import resource="mybatis-spring.xml"/>
+
+    <import resource="agoee-ua-service.xml"/>
     
 </beans>

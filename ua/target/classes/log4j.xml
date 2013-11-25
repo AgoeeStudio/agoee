@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.lookly.oauth">
+	<logger name="com.agoee.oauth">
 		<level value="info" />
 	</logger>
 	

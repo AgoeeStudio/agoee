@@ -85,7 +85,7 @@
 			</list>
 		</constructor-arg>
 	</bean>
-	<bean id="userService" class="com.agoee.ua.ua.service.AccountService"/>
+	<bean id="userService" class="com.agoee.ua.service.AccountService"/>
 	
 	<!-- client信息 -->
     <security:authentication-manager id="clientAuthenticationManager">  

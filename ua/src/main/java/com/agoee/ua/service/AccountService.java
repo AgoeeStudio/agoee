@@ -29,9 +29,9 @@ public class AccountService implements UserDetailsService {
 
 	/**
 	 * <p>
-	 * ��OAuth2�ṩ������Ȩ����ʹ�����û����е�¼��֤֮ǰ����Ҫ�û����е�¼��֤���ɼ�����Ȩ <br />
-	 * �˷���Ϊ�û���¼��֤ʱ��ȷ���û���Ϣ�Ƿ���ȷ��
-	 * ����ʵ����{@code org.springframework.security.core.userdetails.UserDetailsService.loadUserByUsername}����
+	 * 在OAuth2提供方，授权第三方使用其用户进行登录认证之前，需要用户进行登录认证方可继续授权 <br />
+	 * 此方法为用户登录认证时，确认用户信息是否正确。
+	 * 必须实现自{@code org.springframework.security.core.userdetails.UserDetailsService.loadUserByUsername}方法
 	 * </p>
 	 * 
 	 */

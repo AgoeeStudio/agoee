@@ -1,4 +1,4 @@
-package com.agoee.ua.ua.controller;
+package com.agoee.ua.controller;
 
 import java.util.Map;
 

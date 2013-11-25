@@ -38,4 +38,7 @@
 
 	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
     -->
+    
+    <import resource="mybatis-spring.xml"/>
+    
 </beans>

@@ -10,8 +10,10 @@
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" ref="com/agoee/ua/datasource/mapper/*.xml" />
-        <property name="transactionFactory" ref="org.apache.ibats.transaction.managed.ManagedTransactionFactory" />
+        <property name="mapperLocations" value="classpath:com/agoee/ua/persistence/mapper/*.xml" />
+        <property name="transactionFactory">
+        	<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory"></bean>
+        </property>
     </bean>
 
     <tx:jta-transaction-manager />

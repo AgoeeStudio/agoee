@@ -72,7 +72,7 @@
 			<version>${spring.security.oauth2-version}</version>
 		</dependency>
 
-        <!-- mybatis-spring -->
+        <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>

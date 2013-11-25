@@ -26,6 +26,7 @@
 		<property name="poolPreparedStatements" value="true" />
 	</bean>
 
+    <!--
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
@@ -35,7 +36,8 @@
 	</bean>
 
 	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
-    
+    -->
+
     <import resource="mybatis-spring.xml"/>
 
     <import resource="agoee-ua-service.xml"/>

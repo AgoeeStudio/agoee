@@ -23,22 +23,7 @@
     	<custom-filter ref="clientCredentialsTokenEndpointFilter" before="BASIC_AUTH_FILTER"/>
     	<access-denied-handler ref="oauth2AccessDeniedHandler"/>  
 	</http>
-	
-	<!--  
-	<http xmlns="http://www.springframework.org/schema/security" 
-		pattern="/lookly/**" 
-		create-session="never" 
-		entry-point-ref="oauth2AuthenticationEntryPoint"  
-      	access-decision-manager-ref="accessDecisionManager">  
-    	<anonymous enabled="false"/>  
-  
-    	<intercept-url pattern="/lookly/**" access="ROLE_UNITY,SCOPE_READ"/>  
-  
-    	<custom-filter ref="unityResourceServer" before="PRE_AUTH_FILTER"/>  
-    	<access-denied-handler ref="oauth2AccessDeniedHandler"/>  
-	</http>
-	-->
-	
+
 	<http xmlns="http://www.springframework.org/schema/security"
 		access-denied-page="/login.jsp?authorization_error=true"
 		disable-url-rewriting="true" >

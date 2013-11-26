@@ -2,16 +2,18 @@ package com.agoee.ua.service;
 
 import java.util.ArrayList;
 
-import com.agoee.ua.persistence.dao.DaoAccount;
+import com.agoee.ua.persistence.dao.IAccountDao;
 import com.agoee.ua.persistence.pojo.PojoAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * 
@@ -21,11 +23,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  *
  */
 @SuppressWarnings("deprecation")
+@Service
 public class AccountService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
-    private DaoAccount daoAccount;
+    @Autowired
+    private IAccountDao accountDao;
 
 	/**
 	 * <p>
@@ -38,7 +42,7 @@ public class AccountService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        PojoAccount account = daoAccount.selectByUsername(username);
+        PojoAccount account = accountDao.selectByUsername(username);
         System.out.println(account.toString());
 
 
@@ -51,8 +55,4 @@ public class AccountService implements UserDetailsService {
 		UserDetails user = new User(username, "koala", true, true, true, true, gas);
 		return user;
 	}
-
-    public void setDaoAccount(DaoAccount daoAccount) {
-        this.daoAccount = daoAccount;
-    }
 }

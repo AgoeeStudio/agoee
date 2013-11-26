@@ -9,7 +9,7 @@
     </parent>
 	<artifactId>agoee-ua</artifactId>
 	<packaging>war</packaging>
-	<name>agoee ua</name>
+	<name>agoee-ua</name>
 	<description>user authorize center for agoee.com</description>
     <url>http://agoee.com</url>
 	<properties>

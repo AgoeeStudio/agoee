@@ -2,11 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.agoee</groupId>
-    <artifactId>agoee</artifactId>
+    <artifactId>teachtouch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>teachtouch</artifactId>
+  <artifactId>teachtouch-web</artifactId>
   <packaging>war</packaging>
-  <name>teachtouch</name>
-  <description>teachtouch for education</description>
+  <name>teachtouch-web</name>
+  <description>teachtouch web for education</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+	
 </project>

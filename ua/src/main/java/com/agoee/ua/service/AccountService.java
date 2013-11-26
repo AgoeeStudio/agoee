@@ -3,7 +3,7 @@ package com.agoee.ua.service;
 import java.util.ArrayList;
 
 import com.agoee.ua.persistence.dao.IAccountDao;
-import com.agoee.ua.persistence.pojo.PojoAccount;
+import com.agoee.ua.persistence.pojo.AccountPojo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +42,11 @@ public class AccountService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        PojoAccount account = accountDao.selectByUsername(username);
-        System.out.println(account.toString());
-
+        // test database access
+        AccountPojo account = accountDao.selectByUsername(username);
+        if( logger.isDebugEnabled() ) {
+            logger.debug("DAO.selectByUsername: " + username + "account=" + account.toString());
+        }
 
 		// test
 		logger.info("loadUserByUsername: username=" + username);
@@ -55,4 +57,8 @@ public class AccountService implements UserDetailsService {
 		UserDetails user = new User(username, "koala", true, true, true, true, gas);
 		return user;
 	}
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
 }

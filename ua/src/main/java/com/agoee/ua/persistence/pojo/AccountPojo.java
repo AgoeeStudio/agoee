@@ -1,6 +1,6 @@
 package com.agoee.ua.persistence.pojo;
 
-public class PojoAccount {
+public class AccountPojo {
 
     private int id;
 

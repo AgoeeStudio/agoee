@@ -1,15 +1,15 @@
 package com.agoee.ua.persistence.dao;
 
-import com.agoee.ua.persistence.pojo.PojoAccount;
+import com.agoee.ua.persistence.pojo.AccountPojo;
 
 public interface IAccountDao {
 
-    public void insert(PojoAccount account);
+    public void insert(AccountPojo account);
 
-    public PojoAccount selectById(int id);
+    public AccountPojo selectById(int id);
 
-    public PojoAccount selectByUuid(String uuid);
+    public AccountPojo selectByUuid(String uuid);
 
-    public PojoAccount selectByUsername(String username);
+    public AccountPojo selectByUsername(String username);
 
 }

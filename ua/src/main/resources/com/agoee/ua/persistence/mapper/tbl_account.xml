@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.agoee.ua.persistence.dao.tbl_account">
+<mapper namespace="com.agoee.ua.persistence.dao.IAccountDao">
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.agoee.ua.persistence.pojo.AccountPojo">
         INSERT INTO tbl_account ('uuid','username','password','email','verify_code')

@@ -37,7 +37,7 @@
     <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
      -->
 
-    <tx:jta-transaction-manager />
+    <!--启动时报错：<tx:jta-transaction-manager />-->
 
     <!-- SqlSessionFactoryBean & Transaction Factory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

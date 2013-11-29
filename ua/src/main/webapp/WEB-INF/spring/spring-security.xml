@@ -24,6 +24,19 @@
     	<access-denied-handler ref="oauth2AccessDeniedHandler"/>  
 	</http>
 
+	<!-- test -->
+	<http xmlns="http://www.springframework.org/schema/security"
+		pattern="/apis/**" 
+		create-session="never"
+		entry-point-ref="oauth2AuthenticationEntryPoint"
+		access-decision-manager-ref="accessDecisionManager">
+		<anonymous enabled="false" />
+		<intercept-url pattern="/apis" access="ROLE_USER,SCOPE_READ" />
+		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
+		<access-denied-handler ref="oauth2AccessDeniedHandler" />
+	</http>
+	<!-- test -->
+
 	<http xmlns="http://www.springframework.org/schema/security"
 		access-denied-page="/login.jsp?authorization_error=true"
 		disable-url-rewriting="true" >
@@ -41,7 +54,10 @@
 		
 		<anonymous />
 	</http>
-	
+	<bean id="approvalStore"
+		class="org.springframework.security.oauth2.provider.approval.TokenApprovalStore">
+		<property name="tokenStore" ref="tokenStore" />
+	</bean>
 	<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.JdbcTokenStore">
     	<constructor-arg index="0" ref="dataSource"/>
 	</bean>

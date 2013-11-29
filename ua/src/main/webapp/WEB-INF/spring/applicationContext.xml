@@ -55,5 +55,5 @@
         <property name="basePackage" value="com.agoee.ua.persistence.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
-
+	
 </beans>

@@ -4,7 +4,7 @@ public class AccountPojo {
 
     private int id;
 
-    private int uuid;
+    private String uuid;
 
     private String username;
 
@@ -25,11 +25,11 @@ public class AccountPojo {
         this.id = id;
     }
 
-    public int getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(int uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

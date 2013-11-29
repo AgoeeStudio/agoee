@@ -115,3 +115,7 @@ create table ClientDetails (
 );
 -- OAuth相关
 
+--测试数据
+insert into tbl_account (uuid,username,password,email,verify_code) values ('uuid-0001','marissa','koala','email@email.com',null)
+insert into oauth_client_details (client_id, client_secret, resource_ids, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, autoapprove) values ('ua', 'secret', 'ua', 'read,write', 'authorization_code', 'http://localhost:8080/tonr2/ua/apis', 'ROLE_USER', null, null, null)
+

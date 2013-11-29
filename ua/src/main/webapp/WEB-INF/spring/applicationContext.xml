@@ -37,17 +37,13 @@
     <tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
      -->
 
-    <!--启动时报错：<tx:jta-transaction-manager />-->
+    <!-- Container managed transactions,CMT -->
+    <tx:jta-transaction-manager />
 
     <!-- SqlSessionFactoryBean & Transaction Factory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations" value="classpath*:com/agoee/ua/persistence/mapper/*.xml" />
-
-        <property name="transactionFactory">
-            <bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
-        </property>
-
     </bean>
 
     <!-- 数据访问接口映射 -->

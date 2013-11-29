@@ -4,16 +4,12 @@ import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.agoee.ua.persistence.dao.IAccountDao;
-import com.agoee.ua.persistence.pojo.AccountPojo;
 
 /**
  * AccountService
@@ -26,9 +22,6 @@ public class AccountService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
-    @Autowired
-    private IAccountDao accountDao;
-
 	/**
 	 * <p>
 	 * 在OAuth2提供方，授权第三方使用其用户进行登录认证之前，需要用户进行登录认证方可继续授权 <br />
@@ -39,13 +32,6 @@ public class AccountService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		// test database access
-		AccountPojo account = accountDao.selectByUsername(username);
-		if (logger.isDebugEnabled()) {
-			logger.debug("DAO.selectByUsername: " + username + "account=" + account.toString());
-		}
-
 		// test
 		logger.info("loadUserByUsername: username=" + username);
 		SimpleGrantedAuthority sga = new SimpleGrantedAuthority("ROLE_USER");

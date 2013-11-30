@@ -1,6 +1,8 @@
 package com.agoee.ua.persistence.pojo;
 
-public class AccountPojo {
+import java.io.Serializable;
+
+public class AccountPojo implements Serializable {
 
     private int id;
 
@@ -72,4 +74,5 @@ public class AccountPojo {
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
+
 }

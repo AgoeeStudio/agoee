@@ -32,4 +32,12 @@
         SELECT * FROM tbl_account WHERE username = #{username};
     </select>
 
+    <select id="countByUsername" parameterType="string"  resultType="int">
+        SELECT count(*) FROM tbl_account WHERE username = #{username};
+    </select>
+
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT count(*) FROM tbl_account WHERE email = #{email};
+    </select>
+
 </mapper>

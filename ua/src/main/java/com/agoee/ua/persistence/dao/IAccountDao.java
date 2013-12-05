@@ -12,4 +12,7 @@ public interface IAccountDao {
 
     public AccountPojo selectByUsername(String username);
 
+    public int countByUsername(String username);
+
+    public int countByEmail(String email);
 }

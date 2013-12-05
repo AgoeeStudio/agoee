@@ -1,5 +1,8 @@
 package com.agoee.ua.persistence.pojo;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 public class AccountPojo implements Serializable {
@@ -7,11 +10,12 @@ public class AccountPojo implements Serializable {
     private int id;
 
     private String uuid;
-
+    @NotEmpty
     private String username;
-
+    @NotEmpty
     private String password;
-
+    @NotEmpty
+    @Email
     private String email;
 
     private String verifyCode;

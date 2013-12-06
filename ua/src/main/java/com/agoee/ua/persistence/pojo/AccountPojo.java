@@ -7,7 +7,10 @@ import java.io.Serializable;
 
 public class AccountPojo implements Serializable {
 
-    private int id;
+    /** serialVersionUID */
+	private static final long serialVersionUID = 4925279883181631673L;
+
+	private int id;
 
     private String uuid;
     @NotEmpty

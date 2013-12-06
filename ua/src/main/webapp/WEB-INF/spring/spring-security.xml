@@ -86,7 +86,8 @@
 			</list>
 		</constructor-arg>
 	</bean>
-	<bean id="userService" class="com.agoee.ua.service.AccountService"/>
+	
+	<!--  <bean id="userService" class="com.agoee.ua.service.AccountService"/>-->
 	
 	<!-- client信息 -->
     <security:authentication-manager id="clientAuthenticationManager">  
@@ -95,8 +96,9 @@
 	
 	<!-- 用户信息 -->
 	<security:authentication-manager alias="authenticationManager">  
-	    <security:authentication-provider user-service-ref="userService">  
-	        <!--  <security:password-encoder hash="md5"/>-->  
+	    <security:authentication-provider user-service-ref="accountService">  
+	        <!--  <security:password-encoder hash="md5"/>-->
+	        <security:password-encoder hash="plaintext" />
 	    </security:authentication-provider>
 	</security:authentication-manager>
 	

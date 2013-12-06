@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
@@ -9,7 +10,9 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd
-		">
+		http://www.springframework.org/schema/aop   
+    	http://www.springframework.org/schema/aop/spring-aop.xsd"
+		>
 
     <!-- database & data source -->
 	<context:property-placeholder location="classpath:database.properties" />
@@ -24,20 +27,6 @@
         <property name="poolPreparedStatements" value="true" />
     </bean>
 
-    <!-- Data source transaction -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
-    <!-- enable component scanning -->
-    <context:component-scan base-package="com.agoee.ua.service" />
-
-    <!-- enable autowire -->
-    <context:annotation-config />
-
-    <!-- enable transaction demarcation with annotations -->
-    <tx:annotation-driven />
-
     <!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -49,5 +38,43 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.agoee.ua.persistence.dao" />
     </bean>
-
+    
+    <!-- Data source transaction -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+        <tx:attributes>  
+            <tx:method name="remove*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />  
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />  
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"  rollback-for="java.lang.RuntimeException" />  
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException" />  
+            <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException" />  
+            <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />  
+            <tx:method name="publish*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />  
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" />  
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true" />  
+            <tx:method name="query*" propagation="SUPPORTS" read-only="true" />  
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true" />  
+            <tx:method name="page*" propagation="SUPPORTS" read-only="true" />  
+        </tx:attributes>  
+    </tx:advice>
+    
+    <!-- enable transaction demarcation with annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <aop:config>  
+        <aop:pointcut id="pointcut" expression="execution(public * com.agoee.ua.*.service.*.*(..))" />  
+        <aop:advisor pointcut-ref="pointcut" advice-ref="txAdvice" />  
+    </aop:config>
+    
+    <!-- enable autowire -->
+    <context:annotation-config />
+    
+    <!-- component scanner for service -->
+    <context:component-scan base-package="com.agoee.ua" >
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    	<!--  <context:exclude-filter type="regex" expression="com.agoee.ua.controller.*Controller$" />-->
+    </context:component-scan>  
 </beans>

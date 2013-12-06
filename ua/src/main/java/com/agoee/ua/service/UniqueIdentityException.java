@@ -9,7 +9,10 @@ package com.agoee.ua.service;
  */
 public class UniqueIdentityException extends Exception {
 
-    public UniqueIdentityException(String message) {
+    /** serialVersionUID */
+	private static final long serialVersionUID = 5563016880439088578L;
+
+	public UniqueIdentityException(String message) {
         super(message);
     }
 

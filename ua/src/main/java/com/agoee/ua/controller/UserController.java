@@ -1,9 +1,7 @@
 package com.agoee.ua.controller;
 
-import com.agoee.ua.persistence.pojo.AccountPojo;
-import com.agoee.ua.service.AccountService;
-import com.agoee.ua.service.DbAccessTestService;
-import com.agoee.ua.service.UniqueIdentityException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
+import com.agoee.ua.persistence.pojo.AccountPojo;
+import com.agoee.ua.service.AccountService;
+import com.agoee.ua.service.UniqueIdentityException;
 
 /**
  * Handles requests for user
- * .
  */
 @Controller
 @RequestMapping(value="/user")
@@ -40,6 +39,9 @@ public class UserController {
 
         try {
             accountService.register(user);
+            user.setUsername("");
+            user.setEmail("");
+            user.setPassword("");
         } catch (UniqueIdentityException e) {
             e.printStackTrace();
             model.addAttribute("error",e.getMessage());
@@ -49,8 +51,6 @@ public class UserController {
         return "redirect:/user/" + user.getUsername();
     }
 
-
-    // "redirect:/user/" + user.getUsername();
     @RequestMapping(value = "{username}", method = RequestMethod.GET)
     public String getView(@PathVariable String username, Model model) {
         AccountPojo user = accountService.getAccountByName(username);

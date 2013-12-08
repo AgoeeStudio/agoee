@@ -1,7 +1,8 @@
 package com.agoee.ua.controller;
 
-import javax.validation.Valid;
-
+import com.agoee.ua.persistence.pojo.AccountPojo;
+import com.agoee.ua.service.AccountService;
+import com.agoee.ua.service.UniqueIdentityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.agoee.ua.persistence.pojo.AccountPojo;
-import com.agoee.ua.service.AccountService;
-import com.agoee.ua.service.UniqueIdentityException;
+import javax.validation.Valid;
 
 /**
  * Handles requests for user

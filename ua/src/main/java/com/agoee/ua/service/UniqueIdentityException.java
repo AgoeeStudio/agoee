@@ -1,5 +1,7 @@
 package com.agoee.ua.service;
 
+import org.springframework.dao.DataAccessException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: nasya
@@ -7,7 +9,7 @@ package com.agoee.ua.service;
  * Time: 上午12:11
  * To change this template use File | Settings | File Templates.
  */
-public class UniqueIdentityException extends Exception {
+public class UniqueIdentityException extends DataAccessException {
 
     /** serialVersionUID */
 	private static final long serialVersionUID = 5563016880439088578L;

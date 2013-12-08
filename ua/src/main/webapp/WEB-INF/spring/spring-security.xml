@@ -96,7 +96,7 @@
 	
 	<!-- 用户信息 -->
 	<security:authentication-manager alias="authenticationManager">  
-	    <security:authentication-provider user-service-ref="accountService">  
+	    <security:authentication-provider user-service-ref="customerUserDetailsService">
 	        <!--  <security:password-encoder hash="md5"/>-->
 	        <security:password-encoder hash="plaintext" />
 	    </security:authentication-provider>

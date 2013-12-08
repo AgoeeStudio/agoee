@@ -18,9 +18,13 @@
 	<!-- <context:annotation-config/> -->
 	
 	<!-- component scanner for controller -->
-	<context:component-scan base-package="com.agoee.ua.**.controller" />
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
+    <!--<context:component-scan base-package="com.agoee.ua.**.controller" />  -->
+    <context:component-scan base-package="com.agoee.ua" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+
+    <!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
 	
 	<mvc:default-servlet-handler />

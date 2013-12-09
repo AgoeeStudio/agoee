@@ -1,14 +1,13 @@
 package com.agoee.ua.service;
 
-import com.agoee.ua.persistence.dao.IAccountDao;
-import com.agoee.ua.persistence.pojo.AccountPojo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
+import com.agoee.ua.persistence.dao.IAccountDao;
+import com.agoee.ua.persistence.pojo.AccountPojo;
 
 /**
  * AccountService
@@ -18,8 +17,6 @@ import java.util.UUID;
  */
 @Service
 public class AccountService {
-
-	private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
 
     @Autowired
     private IAccountDao accountDao;
@@ -37,7 +34,6 @@ public class AccountService {
         account.setUuid(UUID.randomUUID().toString());
         accountDao.insert(account);
 
-        throw new UniqueIdentityException("test");
     }
 
     public AccountPojo getAccountByName(String username) {

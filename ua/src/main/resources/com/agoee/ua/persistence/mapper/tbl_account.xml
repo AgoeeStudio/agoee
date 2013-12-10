@@ -5,11 +5,6 @@
 
     <cache />
 
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="AccountPojo">
-        INSERT INTO tbl_account (uuid,username,password,email,verify_code)
-        VALUES (#{uuid},#{username},#{password},#{email},#{verifyCode});
-    </insert>
-
     <resultMap id="MapPojoAccount" type="AccountPojo">
         <id column="id" property="id"/>
         <result column="uuid" property="uuid"/>
@@ -19,7 +14,21 @@
         <result column="verify_code" property="verifyCode"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
+    
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="AccountPojo">
+        INSERT INTO tbl_account (uuid,username,password,email,verify_code,create_time)
+        VALUES (#{uuid},#{username},#{password},#{email},#{verifyCode},#{createTime});
+    </insert>
 
+    <update id="update" parameterType="AccountPojo">
+        UPDATE tbl_account SET username=#{username}, password=#{password}, email=#{email}, verify_code=#{verifyCode}
+        WHERE uuid=#{uuid};
+    </update>
+    
+    <delete id="delete" parameterType="string">
+        delete from tbl_account WHERE uuid=#{uuid};
+    </delete>
+    
     <select id="selectById" parameterType="int" resultMap="MapPojoAccount">
         SELECT * FROM tbl_account WHERE id = #{id};
     </select>

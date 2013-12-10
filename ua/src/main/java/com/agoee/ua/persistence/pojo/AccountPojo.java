@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class AccountPojo implements Serializable {
 
@@ -23,7 +24,7 @@ public class AccountPojo implements Serializable {
 
     private String verifyCode;
 
-    private long createTime;
+    private Date createTime;
 
 
     public int getId() {
@@ -74,11 +75,11 @@ public class AccountPojo implements Serializable {
         this.verifyCode = verifyCode;
     }
 
-    public long getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

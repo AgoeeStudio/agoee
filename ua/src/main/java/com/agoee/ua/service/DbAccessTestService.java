@@ -2,11 +2,13 @@ package com.agoee.ua.service;
 
 import com.agoee.ua.persistence.dao.IAccountDao;
 import com.agoee.ua.persistence.pojo.AccountPojo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -25,7 +27,7 @@ public class DbAccessTestService {
         accountPojo.setUsername(username);
         accountPojo.setPassword("000000");
         accountPojo.setEmail("test@agoee.com");
-        accountPojo.setCreateTime(System.currentTimeMillis());
+        accountPojo.setCreateTime(new Date());
         accountPojo.setVerifyCode(Calendar.getInstance().getTime().toString());
         accountDao.insert(accountPojo);
     }

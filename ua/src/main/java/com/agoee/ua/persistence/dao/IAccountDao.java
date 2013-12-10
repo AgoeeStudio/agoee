@@ -5,6 +5,10 @@ import com.agoee.ua.persistence.pojo.AccountPojo;
 public interface IAccountDao {
 
     public void insert(AccountPojo account);
+    
+    public void update(AccountPojo account);
+    
+    public void delete(String uuid);
 
     public AccountPojo selectById(int id);
 

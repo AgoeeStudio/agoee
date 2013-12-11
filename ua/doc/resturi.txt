@@ -1,0 +1,17 @@
+URI设计：
+
+1.用户注册
+URI                         method               description
+/user                       get                  跳转到用户注册界面
+/user/register              post                 用户注册
+/user/{username}            get                  跳转到指定的用户信息界面
+
+2.oauth2客户端注册
+/oauth_client               get                  跳转到oauth2 client主界面
+/oauth_client/register      post                 oauth2 client注册
+/oauth_client/{clientid}    get                  跳转到指定的oauth2 client界面
+
+3.用户认证
+/oauth/confirm_access
+/oauth/token
+/oauth/error

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mybatis mapper config file, see more http://mybatis.github.io/mybatis-3/sqlmap-xml.html -->
+<mapper namespace="com.agoee.ua.persistence.dao.IOAuthClientDetailsDao">
+
+    <cache />
+
+    <resultMap id="OAuthClientDetailsMap" type="OAuthClientDetailsPojo">
+        <id column="client_id" property="client_id"/>
+        <result column="resource_ids" property="resource_ids"/>
+        <result column="client_secret" property="client_secret"/>
+        <result column="scope" property="scope"/>
+        <result column="authorized_grant_types" property="authorized_grant_types"/>
+        <result column="web_server_redirect_uri" property="web_server_redirect_uri"/>
+        <result column="authorities" property="authorities"/>
+        <result column="access_token_validity" property="access_token_validity"/>
+        <result column="refresh_token_validity" property="refresh_token_validity"/>
+        <result column="additional_information" property="additional_information"/>
+        <result column="autoapprove" property="autoapprove"/>
+    </resultMap>
+    
+    <insert id="insert" keyProperty="client_id" parameterType="OAuthClientDetailsPojo">
+        INSERT INTO oauth_client_details (
+        	client_id,
+        	resource_ids,
+        	client_secret,
+        	scope,
+        	authorized_grant_types,
+        	web_server_redirect_uri,
+        	authorities,
+        	access_token_validity,
+        	refresh_token_validity,
+        	additional_information,
+        	autoapprove)
+        VALUES (
+        	#{client_id},
+        	#{resource_ids},
+        	#{client_secret},
+        	#{scope},
+        	#{authorized_grant_types},
+        	#{web_server_redirect_uri},
+        	#{authorities},
+        	#{access_token_validity},
+        	#{refresh_token_validity},
+        	#{additional_information},
+        	#{autoapprove});
+    </insert>
+
+    <update id="update" parameterType="OAuthClientDetailsPojo">
+        UPDATE oauth_client_details SET 
+        	resource_ids=#{resource_ids},
+        	client_secret=#{client_secret},
+        	scope=#{scope},
+        	authorized_grant_types=#{authorized_grant_types},
+        	web_server_redirect_uri=#{web_server_redirect_uri},
+        	authorities=#{authorities},
+        	access_token_validity=#{access_token_validity},
+        	refresh_token_validity=#{refresh_token_validity},
+        	additional_information=#{additional_information},
+        	autoapprove=#{autoapprove} 
+        WHERE client_id=#{client_id};
+    </update>
+    
+    <delete id="delete" parameterType="string">
+        delete from oauth_client_details WHERE client_id = #{client_id};
+    </delete>
+    
+    <select id="selectByClientId" parameterType="string" resultMap="OAuthClientDetailsMap">
+        SELECT * FROM oauth_client_details WHERE client_id = #{client_id};
+    </select>
+
+</mapper>

@@ -38,16 +38,12 @@ public class UserController {
 
         try {
             accountService.register(user);
-            user.setUsername("");
-            user.setEmail("");
-            user.setPassword("");
+            return "redirect:/user/" + user.getUsername();
         } catch (UniqueIdentityException e) {
             e.printStackTrace();
             model.addAttribute("error",e.getMessage());
             return "register";
         }
-
-        return "redirect:/user/" + user.getUsername();
     }
 
     @RequestMapping(value = "{username}", method = RequestMethod.GET)

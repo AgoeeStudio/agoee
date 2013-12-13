@@ -15,3 +15,8 @@ URI                         method               description
 /oauth/confirm_access
 /oauth/token
 /oauth/error
+
+4.测试
+/test/get_json_response     get
+/test/post_json_request     post
+                            {"name":"name","value","value"}

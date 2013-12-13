@@ -21,6 +21,8 @@
 		<spring.security.oauth2-version>2.0.0.BUILD-SNAPSHOT</spring.security.oauth2-version>
         <org.mybatis-version>3.2.3</org.mybatis-version>
 		<org.mybatis.spring-version>1.2.1</org.mybatis.spring-version>
+		<jackson1.version>1.9.2</jackson1.version>
+        <jackson2.version>2.1.1</jackson2.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -86,6 +88,27 @@
 			<version>${org.mybatis.spring-version}</version>
 		</dependency>
 
+		<!-- jackson1 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson1.version}</version>
+		</dependency>
+
+		<!-- jackson2 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson2.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson2.version}</version>
+            <optional>true</optional>
+        </dependency>
+		
 		<!-- jta -->
 		<dependency>
 			<groupId>javax.transaction</groupId>

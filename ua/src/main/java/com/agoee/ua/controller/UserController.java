@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -30,19 +27,36 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String register(Model model, @Valid @ModelAttribute( "user" )AccountPojo user, BindingResult result) {
-        if (result.hasErrors()) {
-            return "register";
-        }
+//    @RequestMapping(value = "register", method = RequestMethod.POST)
+//    public String register(Model model, @Valid @ModelAttribute( "user" )AccountPojo user, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "register";
+//        }
+//
+//        try {
+//            accountService.register(user);
+//            return "redirect:/user/" + user.getUsername();
+//        } catch (UniqueIdentityException e) {
+//            e.printStackTrace();
+//            model.addAttribute("error",e.getMessage());
+//            return "register";
+//        }
+//    }
 
+    @RequestMapping(value = "register", method = RequestMethod.POST,produces = {"text/plain"})
+    @ResponseBody
+    public String register(@RequestParam(required = true) String username,@RequestParam(required = true) String password,@RequestParam(required = true) String email) {
         try {
+            AccountPojo user = new AccountPojo();
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setEmail(email);
+
             accountService.register(user);
-            return "redirect:/user/" + user.getUsername();
+            return "{\"result\":\"success\"}";
         } catch (UniqueIdentityException e) {
             e.printStackTrace();
-            model.addAttribute("error",e.getMessage());
-            return "register";
+            return "{\"result\":\"error\"}";
         }
     }
 

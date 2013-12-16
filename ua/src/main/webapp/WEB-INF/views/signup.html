@@ -10,10 +10,74 @@
 		<title>Signup</title>
 		
 		<!-- Bootstrap core CSS -->
-		<link href="./css/bootstrap.css" rel="stylesheet">
-		
-		<!-- Custom styles for this template -->
-		<link href="./css/signin.css" rel="stylesheet">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+		<!-- Custom styles for this template 
+		<link href="./css/signin.css" rel="stylesheet">-->
+		<style type="text/css">
+			body {
+			  padding-top: 40px;
+			  padding-bottom: 40px;
+			  background-color: #eee;
+			}
+			.form-signup {
+			  max-width: 330px;
+			  padding: 15px;
+			  margin: 0 auto;
+			}
+			.signup-form-header {
+				position:relative;
+				padding:10px 20px;
+				margin:0;
+				
+				color:#fff;
+				text-shadow:0 -1px 0 rgba(0,0,0,0.5);
+				background-color:#6c8393;
+				background-image:-moz-linear-gradient(#7f95a5, #6c8393);
+				background-image:-webkit-linear-gradient(#7f95a5, #6c8393);
+				background-image:linear-gradient(#7f95a5, #6c8393);
+				background-repeat:repeat-x;
+				border:1px solid #6e8290;
+				border-bottom-color:#586873;
+				border-radius:4px 4px 0 0
+			}
+			.signup-form-header h1 {
+				margin-top:0;
+				margin-bottom:0;
+				font-size:16px
+			}
+			.signup-form-body { 
+				padding:20px;
+				-moz-box-sizing:border-box;
+				box-sizing:border-box;
+				font-size:14px;
+				background-color:#fff;
+				border:1px solid #d8dee2;
+				border-top-color:white;
+				border-radius:0 0 4px 4px
+			}
+			.form-signup .form-control {
+			  position: relative;
+			  font-size: 16px;
+			  height: auto;
+			  padding: 10px;
+			  -webkit-box-sizing: border-box;
+			     -moz-box-sizing: border-box;
+			          box-sizing: border-box;
+			}
+			.form-signup .form-control:focus {
+			  z-index: 2;
+			}
+
+			label.error {
+				font-weight: bold;
+				color: red;
+				padding: 2px 8px;
+				margin-top: 2px;
+			}
+
+		</style>
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -23,13 +87,33 @@
 	</head>
 <body>
 	<div class="container">
-		<div id="signupForm" class="form-signin" role="form" >
-			<div class="auth-form-header"><h1 >Sign up</h1></div>
-			<div class="auth-form-body">
-                <input name="username" id="username" type="text" class="form-control" placeholder="User name" required autofocus>
-                <input name="password" id="password" type="password" class="form-control" placeholder="Password" required >
-                <input name="email" id="email" type="text" class="form-control" placeholder="Email address"	required >
-				<button id="sign_up_button" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+		<div id="signup-form" class="form-signup">
+			<div class="signup-form-header"><h1>Sign up</h1></div>
+			<div class="signup-form-body">
+				
+				<div class="control-group">
+					<label class="control-label" for="username">User Name</label>
+					<input type="text" id="username" name="username" class="form-control" autofocus>
+					<div id="message_name"></div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="password">Password</label>
+					<div class="controls">
+						<input type="password" id="password" name="password" class="form-control" >
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label" for="email">Email</label>
+					<div class="controls">
+						<input type="text" id="email" name="email" class="form-control" >
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<button id="sign_up_button" type="submit" class="btn btn-lg btn-primary btn-block">Sign up</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -38,34 +122,85 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+    
+    <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
 
     <script>
         // wait for the DOM to be loaded
         $(document).ready(function() {
-
-            $('#sign_up_button').bind( "click", function() {
-                //alert("click");
-                var request = $.ajax({
-                    url: "/agoee-ua/user/register",
-                    type: "POST",
-                    data: { username : $('#username').val(),password:$('#password').val(),email:$('#email').val() },
-                    //contentType:'application/json',
-                    dataType: "application/json"
-                });
-
-                request.done(function( msg ) {
-                    //$( "#log" ).html( msg );
-                    alert("OK");
-                });
-
-                request.fail(function( jqXHR, textStatus ) {
-                    alert( "Request failed: " + textStatus );
-                });
-            });
-        });
-
-    </script>
+			
+        	var has_error = false;
+        	
+			$('#username').blur(function() {
+				var username = $('#username').val();
+				if (username.length == 0) {
+					if(!$('#username').closest('.control-group').hasClass('error')) {
+						$('#username').closest('.control-group').addClass('error');
+					}
+					$('#message_name').html( "<label class='error'>user name required.</label>" );
+					has_error = true;
+					return;
+				}
+				if (username.length < 6) {
+					if(!$('#username').closest('.control-group').hasClass('error')) {
+						$('#username').closest('.control-group').addClass('error');
+					}
+					$('#message_name').html( "<label class='error'>user name must 6-10 characator.</label>" );
+					has_error = true;
+					return;
+				}
+				$.ajax({
+					url : "/agoee-ua/user/verify_username",
+					type: 'GET',
+					cache: 'false',
+					data: {username: username},
+					error: function(jqXHR, textStatus, textStatus) {
+						
+					},
+					success: function(data) {
+						if (data == 0) {
+							$('#message_name').html( "<label class=''></label>" );
+							$('#username').closest('.control-group').removeClass('error');
+							has_error = false;
+						} else if (data == -1) {
+							$('#message_name').html( "<label class='error'>user name existed.</label>" );
+							$('#username').closest('.control-group').addClass('error');
+							has_error = true;
+						}
+					}
+				});
+			});
+			
+			$('#sign_up_button').click(function(){
+				
+				if(has_error) {
+					return;
+				}
+				var request = $.ajax({
+					url : "/agoee-ua/user/register",
+					type : "POST",
+					data : {
+						username : $('#username').val(),
+						password : $('#password').val(),
+						email : $('#email').val()
+					},
+					dataType : "json"
+				});
+				
+				request.done(function(msg){
+					alert(msg);
+					$(location).attr('href', 'http://localhost:8080/agoee-ua/user/test1');
+				});
+				
+				request.fail(function(jqXHR, textStatus) {
+					alert("Request failed: " + textStatus);
+				});
+			});
+		});
+	</script>
     <!-- Placed at the end of the document so the pages load faster -->
 </body>
 </html>

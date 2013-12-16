@@ -1,15 +1,17 @@
 package com.agoee.ua.controller;
 
-import com.agoee.ua.persistence.pojo.AccountPojo;
-import com.agoee.ua.service.AccountService;
-import com.agoee.ua.service.UniqueIdentityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
+import com.agoee.ua.persistence.pojo.AccountPojo;
+import com.agoee.ua.service.AccountService;
+import com.agoee.ua.service.UniqueIdentityException;
 
 /**
  * Handles requests for user
@@ -43,7 +45,17 @@ public class UserController {
 //        }
 //    }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST,produces = {"text/plain"})
+    @RequestMapping(value = "verify_username", method = RequestMethod.GET)
+    @ResponseBody
+	public int verifyUserName(@RequestParam(required = true) String username) {
+		AccountPojo user = accountService.getAccountByName(username);
+		if (user == null) {
+			return 0;
+		}
+		return -1;
+	}
+    
+    @RequestMapping(value = "register", method = RequestMethod.POST,produces = {"application/json"})
     @ResponseBody
     public String register(@RequestParam(required = true) String username,@RequestParam(required = true) String password,@RequestParam(required = true) String email) {
         try {

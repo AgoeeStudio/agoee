@@ -1,5 +1,7 @@
 package com.agoee.ua.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 
 import org.apache.log4j.Logger;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.agoee.ua.persistence.pojo.TestObj;
 
@@ -68,6 +72,21 @@ public class TestController {
 		out.append("{api1:1,api2:2,api3:3}").toString();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "text/plain; charset=UTF-8");
+		return new ResponseEntity<String>(out.toString(), headers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/test/upload", method = RequestMethod.POST)
+	public ResponseEntity<String> fileUpload(@RequestParam String name, @RequestParam MultipartFile file) {
+		try {
+			InputStream inputStream = file.getInputStream();
+			inputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Content-Type", "text/plain; charset=UTF-8");
+		StringBuilder out = new StringBuilder("{\"result\":\"ok\"}");
 		return new ResponseEntity<String>(out.toString(), headers, HttpStatus.OK);
 	}
 }

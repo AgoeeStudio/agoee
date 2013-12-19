@@ -10,6 +10,7 @@
 	<mvc:view-controller path="/home" view-name="home" />
 	<mvc:view-controller path="/signin" view-name="forward:/WEB-INF/views/signin.html" />
     <mvc:view-controller path="/signup" view-name="forward:/WEB-INF/views/signup.html" />
+    <mvc:view-controller path="/upload" view-name="forward:/WEB-INF/views/upload.html" />
 
 	<!-- 错误路径和错误页面，注意指定viewResolver 
 	<mvc:view-controller path="/404" view-name="404"/>
